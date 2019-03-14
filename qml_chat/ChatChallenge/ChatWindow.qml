@@ -5,6 +5,11 @@ Item {
     anchors {
         fill: parent
     }
+    Rectangle {
+        anchors.fill: parent
+        color: "tomato"
+        opacity: 0.15
+    }
 
     Text {
         id: tempText
