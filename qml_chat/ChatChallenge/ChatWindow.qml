@@ -4,54 +4,56 @@ import QtQuick.Layouts 1.3
 
 Item {
     id: root
+    width: parent.fill
+    height: parent.fill
+
     anchors {
         fill: parent
     }
-    Rectangle {
-        anchors.fill: parent
-        color: "tomato"
-        opacity: 0.15
-    }
-
-    Text {
-        id: tempText
-        text: "This is where you will implement your chat UI"
-        anchors {
-            centerIn: root
-        }
-    }
-
     Component.onCompleted: chatServer.registerClient();
 
     // Add your chat transcript box, message input box, and message sending button here
+    Label {
+        id: userName
+        font.pointSize: 15
+        text: "Name"
+    }
     RowLayout {
         id: firstRow
-        anchors.top: parent
+        width: parent.width
+        height: 40
+        anchors.top: userName.bottom
+        Rectangle {
+            id: firstRowRectangle
+            color: "tomato"
+            anchors.fill: parent
+            opacity: 0.15
+
+        }
         TextInput {
-            Layout.preferredWidth: 400
-            Layout.fillWidth: true
+            id: textInput
             height: parent.height
             color: "black"
             text: "this is dummy text"
+            Layout.fillWidth: parent
         }
         Button {
             id: sendButton
             text: "Send"
-            Layout.fillWidth: true
+            onClicked: console.log("Send Button Clicked")
+            Layout.alignment: Qt.AlignRight
+        }
+    }
+    RowLayout {
+        width: parent.width
+        height: 200
+
+        Rectangle {
+            color: "dodgerblue"
+            opacity: 0.15
+            anchors.fill: parent
         }
 
     }
-    RowLayout {
-        anchors.top: firstRow.bottom
-        TextArea {
-            Layout.preferredWidth: 500
-            Layout.fillHeight: true
-            wrapMode: TextArea.Wrap
-            text:   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin magna
-                    vitae accumsan sollicitudin. Nunc ornare justo eu neque hendrerit dapibus. Duis in justo sed sem
-                    commodo aliquam. Quisque rhoncus turpis in tincidunt consectetur. In hac habitasse platea dictumst.
-                    s luctus. Suspendisse eu est maximus, pellentesque risus in, sollicitudin justo. Proin pellentesque
-                    turpis porta sem auctor volutpat sodales sit amet orci."
-        }
-    }
 }
+
