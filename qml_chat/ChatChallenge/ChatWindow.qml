@@ -6,13 +6,19 @@ Item {
     id: root
     width: parent.fill
     height: parent.fill
-
     anchors {
         fill: parent
     }
     Component.onCompleted: chatServer.registerClient();
 
     // Add your chat transcript box, message input box, and message sending button here
+    property string mText: ""
+    function sendMessage(message) {
+        chatTranscriptText.text = chatTranscriptText.text + "\n" + message
+    }
+
+
+
     Label {
         id: userName
         font.pointSize: 15
@@ -25,35 +31,59 @@ Item {
         anchors.top: userName.bottom
         Rectangle {
             id: firstRowRectangle
-            color: "tomato"
+            border.color: "black"
+            border.width: 1
             anchors.fill: parent
-            opacity: 0.15
+
 
         }
         TextInput {
-            id: textInput
+            id: mTextInput
             height: parent.height
             color: "black"
-            text: "this is dummy text"
-            Layout.fillWidth: parent
+            anchors.fill: parent
         }
         Button {
             id: sendButton
             text: "Send"
-            onClicked: console.log("Send Button Clicked")
+            signal send(string message)
+            onClicked: {
+                mText=mTextInput.text
+                console.log("the value of mText is: " + mText)
+                chatTranscriptText.text = chatTranscriptText.text + "\n" + mText
+                mTextInput.text = ""
+            }
             Layout.alignment: Qt.AlignRight
         }
     }
     RowLayout {
+        id: secondRow
         width: parent.width
-        height: 200
+        height: parent.height
+        anchors.top: firstRow.bottom
+        Layout.margins: 10
 
         Rectangle {
             color: "dodgerblue"
             opacity: 0.15
             anchors.fill: parent
+
+        }
+        ScrollView {
+            id: chatTranscriptScroll
+            anchors.fill: parent
+            TextEdit {
+                id: chatTranscriptText
+                width: chatTranscriptScroll.width
+                readOnly: true
+                textFormat: Text.RichText
+                wrapMode: TextEdit.Wrap
+
+            }
         }
 
     }
+
 }
+
 
