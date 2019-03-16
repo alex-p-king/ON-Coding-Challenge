@@ -12,10 +12,13 @@ Item {
     Component.onCompleted: chatServer.registerClient();
 
     // Add your chat transcript box, message input box, and message sending button here
+
+    property alias userName: userName.text // allows individual names to be set for the userName
+    property alias messageToSend: mTextInput.text // allow access to individual textInput field
+    property alias messageDisplay: chatTranscriptText.text
     property string mText: ""
-    function sendMessage(message) {
-        chatTranscriptText.text = chatTranscriptText.text + "\n" + message
-    }
+    signal sendMessage(string message) // This signal will be fired by the send button and will be used to update both of the text edits to contain the message
+
 
 
 
@@ -46,12 +49,12 @@ Item {
         Button {
             id: sendButton
             text: "Send"
-            signal send(string message)
             onClicked: {
                 mText=mTextInput.text
                 console.log("the value of mText is: " + mText)
-                chatTranscriptText.text = chatTranscriptText.text + "\n" + mText
+                //chatTranscriptText.text = chatTranscriptText.text + "\n" + mText
                 mTextInput.text = ""
+                sendMessage(mText)
             }
             Layout.alignment: Qt.AlignRight
         }
