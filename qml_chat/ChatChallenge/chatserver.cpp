@@ -13,8 +13,8 @@ void ChatServer::registerClient()
     qDebug() << "registering";
 }
 
-void ChatServer::sendMessage()
+void ChatServer::sendMessage(QString message, QString user)
 {
-    /*your implementation here*/
+    emit messageSignal(message, user);
 }
 

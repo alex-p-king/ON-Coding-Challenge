@@ -12,7 +12,10 @@ public:
     explicit ChatServer(QObject *parent = nullptr);
 
     Q_INVOKABLE void registerClient(/*your implementation here*/);
-    Q_INVOKABLE void sendMessage(/*your implementation here*/);
+    Q_INVOKABLE void sendMessage(QString message, QString user);
+
+signals:
+    void messageSignal(QString message, QString user);
 
 private:
     std::map<std::string, QObject*>clients;

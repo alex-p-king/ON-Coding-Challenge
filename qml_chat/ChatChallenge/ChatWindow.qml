@@ -16,6 +16,7 @@ Item {
     property alias userName: userName.text // allows individual names to be set for the userName
     property alias messageToSend: mTextInput.text // allow access to individual textInput field
     property alias messageDisplay: chatTranscriptText.text
+    property string mUser: ""
     property string mText: ""
     signal sendMessage(string message) // This signal will be fired by the send button and will be used to update both of the text edits to contain the message
 
@@ -50,11 +51,13 @@ Item {
             id: sendButton
             text: "Send"
             onClicked: {
-                mText=mTextInput.text
-                console.log("the value of mText is: " + mText)
-                //chatTranscriptText.text = chatTranscriptText.text + "\n" + mText
+
+//              //chatTranscriptText.text = chatTranscriptText.text + "\n" + mText
+                mText = mTextInput.text
+                mUser = userName.text
                 mTextInput.text = ""
-                sendMessage(mText)
+                chatServer.sendMessage(mText, mUser)
+
             }
             Layout.alignment: Qt.AlignRight
         }
