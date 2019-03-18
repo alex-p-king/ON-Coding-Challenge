@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ChatServer_t {
-    QByteArrayData data[10];
-    char stringdata0[98];
+    QByteArrayData data[9];
+    char stringdata0[86];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,15 +37,14 @@ QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 7), // "message"
 QT_MOC_LITERAL(4, 34, 4), // "user"
 QT_MOC_LITERAL(5, 39, 14), // "registerSignal"
-QT_MOC_LITERAL(6, 54, 11), // "std::string"
-QT_MOC_LITERAL(7, 66, 4), // "name"
-QT_MOC_LITERAL(8, 71, 14), // "registerClient"
-QT_MOC_LITERAL(9, 86, 11) // "sendMessage"
+QT_MOC_LITERAL(6, 54, 4), // "name"
+QT_MOC_LITERAL(7, 59, 14), // "registerClient"
+QT_MOC_LITERAL(8, 74, 11) // "sendMessage"
 
     },
     "ChatServer\0messageSignal\0\0message\0"
-    "user\0registerSignal\0std::string\0name\0"
-    "registerClient\0sendMessage"
+    "user\0registerSignal\0name\0registerClient\0"
+    "sendMessage"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,15 +66,15 @@ static const uint qt_meta_data_ChatServer[] = {
        5,    1,   39,    2, 0x06 /* Public */,
 
  // methods: name, argc, parameters, tag, flags
-       8,    1,   42,    2, 0x02 /* Public */,
-       9,    2,   45,    2, 0x02 /* Public */,
+       7,    1,   42,    2, 0x02 /* Public */,
+       8,    2,   45,    2, 0x02 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::QString,    3,    4,
-    QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void, QMetaType::QString,    6,
 
  // methods: parameters
-    QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,    3,    4,
 
        0        // eod
@@ -88,8 +87,8 @@ void ChatServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->messageSignal((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 1: _t->registerSignal((*reinterpret_cast< std::string(*)>(_a[1]))); break;
-        case 2: _t->registerClient((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 1: _t->registerSignal((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->registerClient((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->sendMessage((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         default: ;
         }
@@ -103,7 +102,7 @@ void ChatServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
         }
         {
-            using _t = void (ChatServer::*)(std::string );
+            using _t = void (ChatServer::*)(QString );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ChatServer::registerSignal)) {
                 *result = 1;
                 return;
@@ -160,7 +159,7 @@ void ChatServer::messageSignal(QString _t1, QString _t2)
 }
 
 // SIGNAL 1
-void ChatServer::registerSignal(std::string _t1)
+void ChatServer::registerSignal(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

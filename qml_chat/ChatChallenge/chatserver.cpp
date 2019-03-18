@@ -7,7 +7,7 @@ ChatServer::ChatServer(QObject *parent) :
 {
 }
 
-void ChatServer::registerClient(std::string  name)
+void ChatServer::registerClient(QString  name)
 {
     /*your implementation here*/
     qDebug() << "registering ";
