@@ -13,9 +13,13 @@ Window {
         onMessageSignal: {
             console.log("Message signal caught");
             console.log("the message being sent by the signal is: " + message)
+
             //whenever a message signal is caught update chat 1 and chat 2 to show the new message
             chat1.messageDisplay = chat1.messageDisplay + "\n" + "<b>" + user + ": " + "</b>" + message
             chat2.messageDisplay = chat2.messageDisplay + "\n" + "<b>" + user + ": " + "</b>" + message
+        }
+        onRegisterSignal: {
+            console.log("Registering: " + name )
         }
     }
 

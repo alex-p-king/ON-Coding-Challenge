@@ -9,7 +9,7 @@ Item {
     anchors {
         fill: parent
     }
-    Component.onCompleted: chatServer.registerClient();
+    Component.onCompleted: chatServer.registerClient(userName.text,this);
 
     // Add your chat transcript box, message input box, and message sending button here
 
@@ -45,7 +45,7 @@ Item {
             id: mTextInput
             height: parent.height
             color: "black"
-            anchors.fill: parent
+            anchors.fill: parent 
         }
         Button {
             id: sendButton

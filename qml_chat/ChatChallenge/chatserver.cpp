@@ -7,10 +7,14 @@ ChatServer::ChatServer(QObject *parent) :
 {
 }
 
-void ChatServer::registerClient()
+void ChatServer::registerClient(std::string  name)
 {
     /*your implementation here*/
-    qDebug() << "registering";
+    qDebug() << "registering ";
+    clients = {
+        {name, this}
+    };
+    emit registerSignal(name);
 }
 
 void ChatServer::sendMessage(QString message, QString user)
