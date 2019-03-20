@@ -11,7 +11,6 @@ Window {
     Connections {
         target: chatServer
         onMessageSignal: {
-            console.log("Message signal caught");
             console.log("the message being sent by the signal is: " + message)
 
             //whenever a message signal is caught update chat 1 and chat 2 to show the new message
@@ -26,7 +25,7 @@ Window {
 
     ChatWindow {
         id: chat1
-        userName: "User 1"
+        userName: "<font color='dodgerblue'>User 1</font>"
 
 
         // Set this chat instance's specific properties here
@@ -44,7 +43,7 @@ Window {
 
         ChatWindow {
             id: chat2
-            userName: "User 2"
+            userName: "<font color='red'>User 2</font>"
             // Set this chat instance's specific properties here
 
 

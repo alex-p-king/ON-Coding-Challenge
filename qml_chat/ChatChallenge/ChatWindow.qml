@@ -28,56 +28,57 @@ Item {
         font.pointSize: 15
         text: "Name"
     }
-    RowLayout {
+    Row {
         id: firstRow
         width: parent.width
+
         height: 40
         anchors.top: userName.bottom
         Rectangle {
             id: firstRowRectangle
             border.color: "black"
             border.width: 1
-            anchors.fill: parent
 
 
-        }
-        TextInput {
-            id: mTextInput
-            height: parent.height
-            color: "black"
-            anchors.fill: parent 
+
         }
         Button {
             id: sendButton
+            height: parent.height
             text: "Send"
             onClicked: {
-
-//              //chatTranscriptText.text = chatTranscriptText.text + "\n" + mText
                 mText = mTextInput.text
                 mUser = userName.text
                 mTextInput.text = ""
                 chatServer.sendMessage(mText, mUser)
 
             }
-            Layout.alignment: Qt.AlignRight
         }
+        TextField {
+            id: mTextInput
+            width: 400
+            height: parent.height
+            color: "black"
+            placeholderText: "Enter message..."
+
+        }
+
     }
-    RowLayout {
+    Row {
         id: secondRow
         width: parent.width
         height: parent.height
         anchors.top: firstRow.bottom
-        Layout.margins: 10
 
         Rectangle {
             color: "dodgerblue"
             opacity: 0.15
-            anchors.fill: parent
 
         }
         ScrollView {
             id: chatTranscriptScroll
-            anchors.fill: parent
+            x: sendButton.width
+            width: parent.width
             TextEdit {
                 id: chatTranscriptText
                 width: chatTranscriptScroll.width
