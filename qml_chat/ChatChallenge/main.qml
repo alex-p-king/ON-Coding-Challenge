@@ -6,6 +6,8 @@ Window {
     visible: true
     width: 500
     height: 500
+    //x: screen.width/2 - width/2
+    //y: screen.height/2 - height/2
     title: qsTr("Chat Window 1")
 
     Connections {
@@ -28,8 +30,6 @@ Window {
         userName: "User 1"
         userColor: "dodgerblue"
 
-
-
         // Set this chat instance's specific properties here
 
 
@@ -42,6 +42,8 @@ Window {
         width: 500
         height: 500
         title: qsTr("Chat Window 2")
+        x: window1.x + 550
+        y: window1.y
 
         ChatWindow {
             id: chat2

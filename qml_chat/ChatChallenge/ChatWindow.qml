@@ -12,15 +12,38 @@ Item {
     }
     Component.onCompleted: chatServer.registerClient(userName.text,this);
 
-    // Add your chat transcript box, message input box, and message sending button here
+    /*
+        @ alias userName: gives access to the userName.text outside of ChatWindow.qml
+        @ alias messageToSend: gives access to mTextInput.text outside of ChatWindow.qml
+        @ alias messageDisplay: gives access to chatTranscriptText.text outside of ChatWindow.qml
+    */
 
     property alias userName: userName.text // allows individual names to be set for the userName
     property alias messageToSend: mTextInput.text // allow access to individual textInput field
     property alias messageDisplay: chatTranscriptText.text
+
+    /*
+        @ string mUser: used to set the username of the individual ChatWindow object
+        @ string mText: used to hold the message the user wants to send
+        @ string userColor: used to pass the specific html font color for each user
+    */
     property string mUser: ""
     property string mText: ""
-    property string userColor: "" // used to set the specific color of the chat label
-    signal sendMessage(string message) // This signal will be fired by the send button and will be used to update both of the text edits to contain the message
+    property string userColor: ""
+
+    /*
+        @ function changeUser(): changes the username and registers it with the chatserver class
+    */
+    function changeUser(){
+        if(rUser.text.length){
+            userName.text = rUser.text
+            chatServer.registerClient(userName.text,this)
+            popup.close()
+        }
+        else {
+            console.log("new username must be at least 1 character")
+        }
+    }
 
     MenuBar {
         Menu {
@@ -29,53 +52,41 @@ Item {
             Action {text: qsTr("Register User")
                 onTriggered: {
                     popup.open()
-
                 }
             }
-
         }
     }
     Popup {
         id: popup
-        width: rUser.implicitWidth + 10
-        height: rUser.implicitHeight + 50
+        width: 400
+        height: 50
         modal: true
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         Row {
+            width: popup.width
+            height: popup.height
             anchors.centerIn: parent
             Button {
                 id: newUserButton
-                height: rUser.implicitHeight
-                width: 50
+                height: 50
+                width: 100
                 text: "Submit"
                 onClicked: {
-                    if(rUser.text.length){
-                        userName.text = rUser.text
-                        chatServer.registerClient(userName.text,this)
-                        popup.close()
-                    }
-                    else {
-                        console.log("new username must be at least 1 character")
-                    }
-
+                    changeUser()
                 }
             }
             TextField {
                 id: rUser
-                width: 150
-                height: 40
+                width: 300
+                height: 50
+                text: ""
                 color: "black"
                 placeholderText: "Enter a new username"
-
+                focus: true
             }
-
         }
-
     }
-
-
-
     Label {
         id: userName
         font.pointSize: 15
@@ -86,17 +97,8 @@ Item {
     Row {
         id: firstRow
         width: parent.width
-
         height: 40
         anchors.top: userName.bottom
-        Rectangle {
-            id: firstRowRectangle
-            border.color: "black"
-            border.width: 1
-
-
-
-        }
         Button {
             id: sendButton
             height: parent.height
@@ -106,30 +108,21 @@ Item {
                 mUser = userName.text
                 mTextInput.text = ""
                 chatServer.sendMessage(mText, mUser, userColor)
-
             }
         }
         TextField {
             id: mTextInput
-            width: 400
+            width: parent.width
             height: parent.height
             color: "black"
             placeholderText: "Enter message..."
-
         }
-
     }
     Row {
         id: secondRow
         width: parent.width
         height: parent.height
         anchors.top: firstRow.bottom
-
-        Rectangle {
-            color: "dodgerblue"
-            opacity: 0.15
-
-        }
         ScrollView {
             id: chatTranscriptScroll
             x: sendButton.width
@@ -141,12 +134,9 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: TextEdit.Wrap
                 color: "blue"
-
             }
         }
-
     }
-
 }
 
 
