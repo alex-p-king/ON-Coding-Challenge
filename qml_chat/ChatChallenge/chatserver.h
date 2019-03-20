@@ -12,10 +12,10 @@ public:
     explicit ChatServer(QObject *parent = nullptr);
 
     Q_INVOKABLE void registerClient(QString name);
-    Q_INVOKABLE void sendMessage(QString message, QString user);
+    Q_INVOKABLE void sendMessage(QString message, QString user, QString mColor);
 
 signals:
-    void messageSignal(QString message, QString user);
+    void messageSignal(QString message, QString user, QString mColor);
     void registerSignal(QString name);
 
 private:

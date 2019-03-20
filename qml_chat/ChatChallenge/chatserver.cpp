@@ -17,8 +17,8 @@ void ChatServer::registerClient(QString  name)
     emit registerSignal(name);
 }
 
-void ChatServer::sendMessage(QString message, QString user)
+void ChatServer::sendMessage(QString message, QString user, QString mColor)
 {
-    emit messageSignal(message, user);
+    emit messageSignal(message, user, mColor);
 }
 

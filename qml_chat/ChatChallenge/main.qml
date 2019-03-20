@@ -14,8 +14,8 @@ Window {
             console.log("the message being sent by the signal is: " + message)
 
             //whenever a message signal is caught update chat 1 and chat 2 to show the new message
-            chat1.messageDisplay = chat1.messageDisplay + "\n" + "<b>" + user + ": " + "</b>" + message
-            chat2.messageDisplay = chat2.messageDisplay + "\n" + "<b>" + user + ": " + "</b>" + message
+            chat1.messageDisplay = chat1.messageDisplay + "\n" + "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message
+            chat2.messageDisplay = chat2.messageDisplay + "\n" + "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message
         }
         onRegisterSignal: {
             console.log("Registering: " + name )
@@ -25,7 +25,9 @@ Window {
 
     ChatWindow {
         id: chat1
-        userName: "<font color='dodgerblue'>User 1</font>"
+        userName: "User 1"
+        userColor: "dodgerblue"
+
 
 
         // Set this chat instance's specific properties here
@@ -43,7 +45,8 @@ Window {
 
         ChatWindow {
             id: chat2
-            userName: "<font color='red'>User 2</font>"
+            userColor: "red"
+            userName: "User 2"
             // Set this chat instance's specific properties here
 
 
