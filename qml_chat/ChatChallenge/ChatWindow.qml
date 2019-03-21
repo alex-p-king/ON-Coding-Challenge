@@ -32,19 +32,10 @@ Item {
     property string userColor: ""
 
     /*
-        @ function changeUser(): changes the username and registers it with the chatserver class
         @ function sendMessageToServer(): called when the send button is clicked, this function sends the strings mText, mUser, and mColor to the chat server and resets the text in the messageInputField
     */
-    function changeUser(){
-        if(registerUserTextField.text.length > 0 && registerUserTextField.text.length < 31){
-            userName.text = registerUserTextField.text
-            chatServer.registerClient(userName.text,this)
-            popup.close()
-        }
-        else {
-            console.log("new username must be at least 1 character and no more than 30 characters")
-        }
-    }
+
+
     function sendMessageToServer(){
         mText = messageInputField.text
         mUser = userName.text
@@ -57,49 +48,8 @@ Item {
         }
     }
 
-    MenuBar {
-        Menu {
-            id: menu
-            title: qsTr("File")
-            Action
-            {text: qsTr("Register User")
-                onTriggered: {
-                    popup.open()
-                }
-            }
-        }
-    }
-    Popup {
-        id: popup
-        width: 400
-        height: 50
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        Row {
-            width: popup.width
-            height: popup.height
-            anchors.centerIn: parent
-            Button {
-                id: newUserButton
-                height: 50
-                width: 100
-                text: "Submit"
-                onClicked: {
-                    changeUser()
-                }
-            }
-            TextField {
-                id: registerUserTextField
-                width: 300
-                height: 50
-                text: ""
-                color: "black"
-                placeholderText: "Enter a new username"
-                focus: true
-            }
-        }
-    }
+    RegisterUserMenu { }
+
     Label {
         id: userName
         font.pointSize: 15
