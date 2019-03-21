@@ -34,8 +34,6 @@ Item {
     /*
         @ function sendMessageToServer(): called when the send button is clicked, this function sends the strings mText, mUser, and mColor to the chat server and resets the text in the messageInputField
     */
-
-
     function sendMessageToServer(){
         mText = messageInputField.text
         mUser = userName.text
@@ -48,20 +46,25 @@ Item {
         }
     }
 
-    RegisterUserMenu { }
-
+    RegisterUserMenu {
+        width: parent.width - 5
+        x: 5
+    }
     Label {
         id: userName
         font.pointSize: 15
+        font.family: "Helvetica"
         text: "Name"
         color: userColor
         y: 40
+        x: 5
     }
     Row {
         id: firstRow
-        width: parent.width
+        width: parent.width - 5
         height: 40
         anchors.top: userName.bottom
+        x: 5
         Button {
             id: sendButton
             height: parent.height
@@ -76,6 +79,10 @@ Item {
             height: parent.height
             color: "black"
             placeholderText: "Enter message..."
+            font.family: "Helvetica"
+            font.pointSize: 12
+            Keys.onReturnPressed: sendMessageToServer()
+            Keys.onEnterPressed: sendMessageToServer()
         }
     }
     Row {
@@ -93,9 +100,10 @@ Item {
                 readOnly: true
                 textFormat: Text.RichText
                 wrapMode: TextEdit.Wrap
-                color: "blue"
+                color: "darkslateblue"
+                font.family: "Helvetica"
+                font.pointSize: 12
                 padding: 10
-
             }
         }
     }

@@ -26,7 +26,7 @@ Window {
     }
     ChatWindow {
         id: chat2
-        userColor: "red"
+        userColor: "firebrick"
         userName: "User 2"
     }
 
@@ -39,13 +39,11 @@ Window {
         minimumHeight: 200
         minimumWidth: 200
         title: qsTr("Chat Window 1")
-
         ChatWindow {
             id: chat1
             userName: "User 1"
             userColor: "dodgerblue"
             focus: true
-
         }
     }
 }
