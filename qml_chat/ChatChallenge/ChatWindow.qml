@@ -47,8 +47,7 @@ Item {
     }
 
     RegisterUserMenu {
-        width: parent.width - 5
-        x: 5
+
     }
     Label {
         id: userName
@@ -64,7 +63,7 @@ Item {
         width: parent.width - 5
         height: messageInputField.contentHeight + 5
         anchors.top: userName.bottom
-        x: 5
+        padding: 0
         Button {
             id: sendButton
             height: parent.height
@@ -80,33 +79,30 @@ Item {
             color: "black"
             placeholderText: "Enter message..."
             font.family: "Helvetica"
-            font.pointSize: 12
+            font.pointSize: 13
             Keys.onReturnPressed: sendMessageToServer()
             Keys.onEnterPressed: sendMessageToServer()
         }
     }
-    Row {
-        id: secondRow
+
+    ScrollView {
+        id: chatTranscriptScroll
         width: parent.width
-        height: chatTranscriptText.contentHeight
+        height: parent.fill
         anchors.top: firstRow.bottom
-        leftPadding: 5
-        rightPadding: 5
-        ScrollView {
-            id: chatTranscriptScroll
-            x: sendButton.width
-            width: parent.width
-            TextEdit {
-                id: chatTranscriptText
-                width: chatTranscriptScroll.width
-                readOnly: true
-                textFormat: Text.RichText
-                wrapMode: TextEdit.Wrap
-                color: "darkslateblue"
-                font.family: "Helvetica"
-                font.pointSize: 12
-                padding: 10
-            }
+        contentWidth: chatTranscriptText.contentWidth
+        contentHeight: chatTranscriptText.height
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+        TextEdit {
+            id: chatTranscriptText
+            width: chatTranscriptScroll.width
+            readOnly: true
+            textFormat: Text.RichText
+            wrapMode: TextEdit.Wrap
+            color: "darkslateblue"
+            font.family: "Helvetica"
+            font.pointSize: 13
+            padding: 10
         }
     }
 }
