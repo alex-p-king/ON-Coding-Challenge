@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.2
+
 
 Item {
     id: root
@@ -48,8 +48,13 @@ Item {
     function sendMessageToServer(){
         mText = messageInputField.text
         mUser = userName.text
-        messageInputField.text = ""
-        chatServer.sendMessage(mText, mUser, userColor)
+        if(mText.length){
+            messageInputField.text = ""
+            chatServer.sendMessage(mText, mUser, userColor)
+        }
+        else{
+            console.log("there is no message to send")
+        }
     }
 
     MenuBar {

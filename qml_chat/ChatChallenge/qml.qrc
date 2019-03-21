@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ChatWindow.qml</file>
+        <file>RegisterUserMenu.qml</file>
     </qresource>
 </RCC>
