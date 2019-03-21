@@ -62,7 +62,7 @@ Item {
     Row {
         id: firstRow
         width: parent.width - 5
-        height: 40
+        height: messageInputField.contentHeight + 5
         anchors.top: userName.bottom
         x: 5
         Button {
@@ -88,8 +88,10 @@ Item {
     Row {
         id: secondRow
         width: parent.width
-        height: parent.height
+        height: chatTranscriptText.contentHeight
         anchors.top: firstRow.bottom
+        leftPadding: 5
+        rightPadding: 5
         ScrollView {
             id: chatTranscriptScroll
             x: sendButton.width
