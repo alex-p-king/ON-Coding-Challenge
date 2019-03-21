@@ -2,6 +2,11 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 
+/*
+    @ registerUserContainer: this is the primary identifier of the RegisterUserMenu component. this component allows the user to
+                             graphically change their username and register with the chatserver.
+*/
+
 Item {
     id: registerUserMenuContainer
 
