@@ -1,21 +1,23 @@
-import QtQuick 2.9
-import QtQuick.Window 2.2
+import QtQuick 2.12
+import QtQuick.Window 2.12
 
 Window {
     id: window1
     visible: true
     width: 500
     height: 500
-    //x: screen.width/2 - width/2
-    //y: screen.height/2 - height/2
+    minimumHeight: 200
+    minimumWidth: 200
     title: qsTr("Chat Window 1")
 
+    /*
+        @ onMessageSignal: recieves the message, user, and color from the chatserver and updates to display html formatted messages
+        @ onRegisterSignal: triggered whenever a new user is registered, this block logs the user being registered to the console
+    */
     Connections {
         target: chatServer
         onMessageSignal: {
             console.log("the message being sent by the signal is: " + message)
-
-            //whenever a message signal is caught update chat 1 and chat 2 to show the new message
             chat1.messageDisplay = chat1.messageDisplay + "\n" + "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message
             chat2.messageDisplay = chat2.messageDisplay + "\n" + "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message
         }
@@ -24,16 +26,10 @@ Window {
         }
     }
 
-
     ChatWindow {
         id: chat1
         userName: "User 1"
         userColor: "dodgerblue"
-
-        // Set this chat instance's specific properties here
-
-
-
     }
 
     Window {
@@ -41,18 +37,13 @@ Window {
         visible: true
         width: 500
         height: 500
+        minimumHeight: 200
+        minimumWidth: 200
         title: qsTr("Chat Window 2")
-        x: window1.x + 550
-        y: window1.y
-
         ChatWindow {
             id: chat2
             userColor: "red"
             userName: "User 2"
-            // Set this chat instance's specific properties here
-
-
-
         }
     }
 }

@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
@@ -10,16 +10,16 @@ Item {
     anchors {
         fill: parent
     }
+    // sends username and the chatwindow object to the client
     Component.onCompleted: chatServer.registerClient(userName.text,this);
 
     /*
         @ alias userName: gives access to the userName.text outside of ChatWindow.qml
-        @ alias messageToSend: gives access to mTextInput.text outside of ChatWindow.qml
+        @ alias messageToSend: gives access to messageInputField.text outside of ChatWindow.qml
         @ alias messageDisplay: gives access to chatTranscriptText.text outside of ChatWindow.qml
     */
-
     property alias userName: userName.text // allows individual names to be set for the userName
-    property alias messageToSend: mTextInput.text // allow access to individual textInput field
+    property alias messageToSend: messageInputField.text // allow access to individual textInput field
     property alias messageDisplay: chatTranscriptText.text
 
     /*
@@ -33,23 +33,31 @@ Item {
 
     /*
         @ function changeUser(): changes the username and registers it with the chatserver class
+        @ function sendMessageToServer(): called when the send button is clicked, this function sends the strings mText, mUser, and mColor to the chat server and resets the text in the messageInputField
     */
     function changeUser(){
-        if(rUser.text.length){
-            userName.text = rUser.text
+        if(registerUserTextField.text.length > 0 && registerUserTextField.text.length < 31){
+            userName.text = registerUserTextField.text
             chatServer.registerClient(userName.text,this)
             popup.close()
         }
         else {
-            console.log("new username must be at least 1 character")
+            console.log("new username must be at least 1 character and no more than 30 characters")
         }
+    }
+    function sendMessageToServer(){
+        mText = messageInputField.text
+        mUser = userName.text
+        messageInputField.text = ""
+        chatServer.sendMessage(mText, mUser, userColor)
     }
 
     MenuBar {
         Menu {
             id: menu
             title: qsTr("File")
-            Action {text: qsTr("Register User")
+            Action
+            {text: qsTr("Register User")
                 onTriggered: {
                     popup.open()
                 }
@@ -77,7 +85,7 @@ Item {
                 }
             }
             TextField {
-                id: rUser
+                id: registerUserTextField
                 width: 300
                 height: 50
                 text: ""
@@ -104,14 +112,11 @@ Item {
             height: parent.height
             text: "Send"
             onClicked: {
-                mText = mTextInput.text
-                mUser = userName.text
-                mTextInput.text = ""
-                chatServer.sendMessage(mText, mUser, userColor)
+                sendMessageToServer()
             }
         }
         TextField {
-            id: mTextInput
+            id: messageInputField
             width: parent.width
             height: parent.height
             color: "black"
@@ -134,6 +139,8 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: TextEdit.Wrap
                 color: "blue"
+                padding: 10
+
             }
         }
     }
