@@ -1,9 +1,9 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.5
-import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.5
 
 
-Item {
+Page {
     id: root
     width: parent.fill
     height: parent.fill
@@ -85,7 +85,7 @@ Item {
             Keys.onEnterPressed: sendMessageToServer()
         }
     }
-    Row {
+    Column {
         id: secondRow
         width: parent.width
         height: parent.height
@@ -94,9 +94,12 @@ Item {
             id: chatTranscriptScroll
             x: sendButton.width
             width: parent.width
-            TextEdit {
+            anchors.fill: parent
+            clip: true
+            TextArea {
                 id: chatTranscriptText
                 width: chatTranscriptScroll.width
+                height: chatTranscriptScroll.height
                 readOnly: true
                 textFormat: Text.RichText
                 wrapMode: TextEdit.Wrap

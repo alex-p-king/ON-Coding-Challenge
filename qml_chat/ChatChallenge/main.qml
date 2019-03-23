@@ -29,8 +29,6 @@ Window {
         userColor: "firebrick"
         userName: "User 2"
     }
-
-
     Window {
         id: window1
         visible: true
