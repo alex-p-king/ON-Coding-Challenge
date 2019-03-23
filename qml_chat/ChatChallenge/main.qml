@@ -6,8 +6,8 @@ Window {
     visible: true
     width: 500
     height: 500
-    minimumHeight: 200
-    minimumWidth: 200
+    minimumHeight: 500
+    minimumWidth: 500
     title: qsTr("Chat Window 2")
     /*
         @ onMessageSignal: recieves the message, user, and color from the chatserver and updates to display html formatted messages
@@ -17,8 +17,8 @@ Window {
         target: chatServer
         onMessageSignal: {
             console.log("the message being sent by the signal is: " + message)
-            chat1.messageDisplay = chat1.messageDisplay + "\n" + "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message
-            chat2.messageDisplay = chat2.messageDisplay + "\n" + "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message
+            chat1.messageDisplay = "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message + "\n" + chat1.messageDisplay
+            chat2.messageDisplay = "<b><font color='" + mColor + "'>" + user + ": " + "</b><font>" + message + "\n" + chat2.messageDisplay
         }
         onRegisterSignal: {
             console.log("Registering: " + name )
@@ -34,8 +34,8 @@ Window {
         visible: true
         width: 500
         height: 500
-        minimumHeight: 200
-        minimumWidth: 200
+        minimumHeight: 500
+        minimumWidth: 500
         title: qsTr("Chat Window 1")
         ChatWindow {
             id: chat1

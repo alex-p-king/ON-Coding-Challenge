@@ -5,8 +5,6 @@ import QtQuick.Layouts 1.5
 
 Page {
     id: root
-    width: parent.fill
-    height: parent.fill
     anchors {
         fill: parent
     }
@@ -85,21 +83,17 @@ Page {
             Keys.onEnterPressed: sendMessageToServer()
         }
     }
-    Column {
-        id: secondRow
-        width: parent.width
-        height: parent.height
+    Pane {
+        id: chatTranscriptContainer
+        width: root.width
+        height: parent.height - 110
         anchors.top: firstRow.bottom
         ScrollView {
             id: chatTranscriptScroll
-            x: sendButton.width
-            width: parent.width
             anchors.fill: parent
             clip: true
             TextArea {
                 id: chatTranscriptText
-                width: chatTranscriptScroll.width
-                height: chatTranscriptScroll.height
                 readOnly: true
                 textFormat: Text.RichText
                 wrapMode: TextEdit.Wrap
