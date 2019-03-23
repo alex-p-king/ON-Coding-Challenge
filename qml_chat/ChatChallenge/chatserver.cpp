@@ -9,7 +9,7 @@ ChatServer::ChatServer(QObject *parent) :
 
 void ChatServer::registerClient(QString  name)
 {
-    /*your implementation here*/
+
     clients = {
         {name, this}
     };

@@ -44,6 +44,9 @@ Page {
         }
     }
 
+    /*
+        The following code blocks contain the formatting for the ChatWindow and the function calls for when the sendButton is pressed
+    */
     RegisterUserMenu {
         width: parent.width - 5
         x: 5

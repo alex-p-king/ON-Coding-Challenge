@@ -17,6 +17,7 @@ Item {
         if(registerUserTextField.text.length > 0 && registerUserTextField.text.length < 31){
             userName.text = registerUserTextField.text
             chatServer.registerClient(userName.text,this)
+            registerUserTextField.text = ""
             popup.close()
         }
         else {
@@ -26,7 +27,7 @@ Item {
     MenuBar {
         Menu {
             id: menu
-            title: qsTr("File")
+            title: qsTr("New")
             Action
             {text: qsTr("Register User")
                 onTriggered: {
@@ -63,6 +64,8 @@ Item {
                 color: "black"
                 placeholderText: "Enter a new username"
                 focus: true
+                Keys.onReturnPressed: changeUser()
+                Keys.onEnterPressed: changeUser()
             }
         }
     }

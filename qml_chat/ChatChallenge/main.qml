@@ -24,6 +24,7 @@ Window {
             console.log("Registering: " + name )
         }
     }
+
     ChatWindow {
         id: chat2
         userColor: "firebrick"
